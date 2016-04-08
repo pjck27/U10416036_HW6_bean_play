@@ -14,12 +14,8 @@ import javafx.scene.text.Text;
  */
 
 public class BeanGame extends Application {
-    //@Override
-    int n = 0 ;
-	
+    BallPane b = new BallPane();
     public void start(Stage primaryStage) {
-        BallPane b = new BallPane();
-        
         Text text = new Text(20, 20, "");
 
         b.setOnMouseMoved(e -> {
@@ -35,7 +31,7 @@ public class BeanGame extends Application {
 
         primaryStage.setScene(scene);
         b.getChildren().add(drawer);
-        b.getChildren().add(text);
+        //b.getChildren().add(text);
         primaryStage.setTitle("Bean Machine");
         primaryStage.show();
 
@@ -49,12 +45,8 @@ public class BeanGame extends Application {
     }
 }
 
-
 class Drawer extends Pane{
-    public final double radius = 3;
-    private double x = radius, y = radius;
-    private double dx = 0, dy = 1;
-    private Timeline animation;
+   
     
     public Drawer(){
         int slot = 8;
@@ -88,7 +80,7 @@ class Drawer extends Pane{
                 Circle c1 = new Circle();
                 c1.setCenterX(148.5-x*i + 2*x*j);
                 c1.setCenterY(95+y*i);
-                c1.setRadius(5.0f);
+                c1.setRadius(4.0f);
                 getChildren().add(c1);
             }
         }
