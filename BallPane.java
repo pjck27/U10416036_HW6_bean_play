@@ -1,94 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ballpane;
+//U10416036
+
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-/**
- *
- * @author MACBOOK
- */
-public class BallPane extends Application {
-    
-    @Override
-    public void start(Stage primaryStage) {
-        Ball b = new Ball();
-        b.setOnMousePressed(e -> b.pause());
-        b.setOnMouseReleased(e -> b.play());
-        
-        b.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP){
-                b.increaseSpeed();
-            }
-            else if(e.getCode() == KeyCode.DOWN){
-                b.decreaseSpeed();
-            }});
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(b);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("BallPane");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
-}
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author MACBOOK
- */
-class Ball extends Pane{
-    public final double radius = 3;
-    private double x = radius, y = radius;
+public class BallPane extends Pane{
+    public final double radius = 4;
+    private double x = 150, y = 0;
     private double dx = 1, dy = 1;
-    private Circle circle = new Circle(x, y, radius);
-    private Timeline animation;
     
-    public Ball(){
-        circle.setFill(Color.BLACK);
+    
+    
+    private Timeline animation; 
+    private Circle circle = new Circle(x, y, radius);
+
+    public BallPane(){
+        circle.setFill(Color.RED);
         getChildren().add(circle);
-        animation = new Timeline(new KeyFrame(Duration.millis(50), e -> moveBall()));
+        animation = new Timeline(new KeyFrame(Duration.millis(8), e -> moveBall()));
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
-        
-       
     }
-    
-    
-
     
     public void play(){
         animation.play();
@@ -106,16 +43,98 @@ class Ball extends Pane{
         return animation.rateProperty();
     }
     protected void moveBall(){
-        if(x<radius || x > getWidth() - radius){
-            dx *= -1;
+    int random;
+    double d = 0.45;
+    
+    if(y >= 75 && y < 254){
+        if (y == 75) {
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+                dx *= -d; 	
+            }else{
+                dx *= d; 
+            }
+		 
         }
-        if(y<radius || y > getWidth() - radius){
-            dy *= -1;
+        if(y == 100){
+            random = (int)(Math.random() * 2);            
+            if(random == 1){
+                if(dx == d||dx == -d){
+                    dx *= -1; 	
+                }
+                else dx *= -d;
+            }else{
+                if(dx == d||dx == -d){
+                    dx *= 1; 
+                }
+                else dx *= d;
+            }
+        }
+        if(y == 125){
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+                dx *= -1; 	
+            }else{
+                dx *= 1; 
+            }
+        }
+        if(y == 153){
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+                dx *= -1; 	
+            }else{
+                dx *= 1; 
+            }
+        }
+        if(y == 178){
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+                dx *= -1; 	
+            }else{
+                dx *= 1; 
+            }
+        }
+        if(y == 203){
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+                dx *= -1; 	
+            }else{
+                dx *= 1; 
+            }
+	}
+        if(y == 228){
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+                dx *= -1; 	
+            }else{
+                dx *= 1; 
+            }
+	}
+        if(y == 228){
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+		dx *= -1; 	
+            }else{
+                dx *= 1; 
+            }
+	}
+        if(y == 253){
+            random = (int)(Math.random() * 2);
+            if(random == 1){
+                dx *= -1; 	
+            }else{
+                dx *= 1; 
+            }
         }
         x += dx;
-        y += dy;
-        circle.setCenterX(x);
-        circle.setCenterY(y);
-        
     }
+    if(y == 275){
+        dy *= 0;
+    }
+    // Adjust ball position
+    y += dy;
+    circle.setCenterX(x);
+    circle.setCenterY(y);
+    }
+    
 }
